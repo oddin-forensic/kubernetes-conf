@@ -23,6 +23,8 @@ spec:
         env:
         - name: APP_URL
           value: "http://127.0.0.1"
+        - name: DB_CONNECTION
+          value: pgsql
         - name: DB_HOST
           value: postgres-service
         - name: DB_PORT
@@ -37,3 +39,7 @@ spec:
           value: memcached-clusterip-service
         - name: MEMCACHED_PORT
           value: "11211"
+        - name: JWT_SECRET
+          value: EsMshfv3DI8HuORFZLRnmhtqugfaku2iOt9UmUp0xbfSCh4cvZIcQw0rJFDYME9U
+        - name: JWT_TTL
+          value: "360"

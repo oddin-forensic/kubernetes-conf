@@ -15,6 +15,11 @@ spec:
       - name: container-frontend
         image: juniorsntsid/oddin-frontend:v1
         imagePullPolicy: Always
+        env: 
+        - name: VUE_APP_API_URL
+          value: nginx-api-service-clusterip
+        - name: VUE_APP_API_PORT
+          value: "80"
         envFrom:
         - configMapRef:
             name: global-configmaps
