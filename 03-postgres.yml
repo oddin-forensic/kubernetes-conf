@@ -23,11 +23,11 @@ spec:
               mountPath: /var/lib/postgresql/data/pgdata
           env:
             - name: POSTGRES_PASSWORD
-              value: airflow
+              value: oddin
             - name: POSTGRES_USER
-              value: airflow
+              value: oddin
             - name: POSTGRES_DB
-              value: airflow
+              value: oddin
             - name: PGDATA
               value: /var/lib/postgresql/data/pgdata
           resources:
@@ -41,7 +41,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: postgres-airflow
+  name: postgres-service
 spec:
   clusterIP: None
   ports:

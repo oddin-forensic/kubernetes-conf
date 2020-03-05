@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  selector:
+    matchLabels: 
+      name: nginx-pod
+  template:
+    metadata:
+      labels:
+        name: nginx-pod
+    spec:
+      containers:
+      - name: container-nginx
+        image: juniorsntsid/nginx-laravel-oddin:v1
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 80

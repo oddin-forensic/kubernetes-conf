@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: memcached-statefulset
+spec:
+  serviceName: memcached-statefulset
+  replicas: 1
+  selector:
+    matchLabels: 
+      name: memcached-pod-statefulset
+  template:
+    metadata:
+      labels:
+        name: memcached-pod-statefulset
+    spec:
+      containers:
+      - name: container-memcached-statefulset
+        image: memcached:1.5.22
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 11211

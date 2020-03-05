@@ -1,4 +1,4 @@
-apiVersion: v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: frontend-deployment
@@ -15,5 +15,8 @@ spec:
       - name: container-frontend
         image: juniorsntsid/oddin-frontend:v1
         imagePullPolicy: Always
+        envFrom:
+        - configMapRef:
+            name: global-configmaps
         ports:
-          - containerPort: 8080
+          - containerPort: 80
