@@ -26,7 +26,7 @@ spec:
         - name: DB_HOST
           value: postgres-service
         - name: DB_PORT
-          value: 5432
+          value: "5432"
         - name: DB_DATABASE
           value: oddin
         - name: DB_USERNAME
@@ -36,4 +36,4 @@ spec:
         - name: MEMCACHED_HOST
           value: memcached-clusterip-service
         - name: MEMCACHED_PORT
-          value: 11211
+          value: "11211"

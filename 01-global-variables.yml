@@ -4,10 +4,10 @@ kind: ConfigMap
 data:
   SERVICE_BACKEND_API: nginx-api-service-clusterip
   SERVICE_FRONTEND: frontend-service-clusterip
-  SERVICE_AIRFLOW: 
+  # SERVICE_AIRFLOW: 
   SERVICE_MEMCACHED: memcached-clusterip-service
-  SERVICE_DGRAPH_ALPHA: 
-  SERVICE_DGRAPH_ZERO: 
-  SERVICE_RATEL: 
+  # SERVICE_DGRAPH_ALPHA: 
+  # SERVICE_DGRAPH_ZERO: 
+  # SERVICE_RATEL: 
 metadata:
   name: global-configmaps
