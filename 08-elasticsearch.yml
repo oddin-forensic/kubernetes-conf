@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: elastic-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: elastic-pod
+  template:
+    metadata:
+      labels:
+        app: elastic-pod
+    spec:
+      containers:
+      - name: elasticsearch-container
+        image: docker.elastic.co/elasticsearch/elasticsearch:6.7.2
+        ports:
+        - containerPort: 9200
+        env:
+        - name: cluster.name
+          value: elasticsearch-default
+        - name: discovery.type
+          value: single-node
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: elastic-service-clusterip
+spec:
+  ports:
+  - port: 9200
+    targetPort: 9200
+    protocol: TCP
+  selector: 
+    app: elastic-pod
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: elastic-service-nodeport
+spec:
+  ports:
+  - nodePort: 31470
+    port: 9200
+    targetPort: 9200
+    protocol: TCP
+  selector: 
+    app: elastic-pod
+  type: NodePort
