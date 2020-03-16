@@ -12,3 +12,17 @@ spec:
     protocol: TCP
   selector: 
     name: ambassador-pod 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ambassador-pod
+  annotations:
+    service.beta.kubernetes.io/do-loadbalancer-protocol: "http"
+spec:
+  selector:
+    app: ambassador-loadbalancer
+  ports:
+    - port: 8088
+      targetPort: 8080
+  type: LoadBalancer

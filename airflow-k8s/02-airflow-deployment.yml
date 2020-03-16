@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: airflow-webserver-deployment
+spec:
+  selector:
+    matchLabels:
+      name: airflow-webserver-pod
+  template:
+    metadata:
+      labels:
+        name: airflow-webserver-pod
+    spec:
+      volumes:
+      - emptyDir: {}
+        name: airflow-dags
+      - configMap:
+          name: airflow-cfgfile
+        name: airflow-cfgfile
+      containers:
+      - name: container-webserver-airflow
+        image: juniorsntsid/airflow-docker:v2
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 8080
+        args:
+        - webserver
+        envFrom:
+        - configMapRef:
+            name: airflow-cfgfile
+        volumeMounts:
+        - name: airflow-dags
+          mountPath: /usr/local/airflow/dags

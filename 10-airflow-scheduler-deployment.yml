@@ -11,27 +11,21 @@ spec:
       labels:
         name: airflow-scheduler-pod
     spec:
-      containers:
-      - name: container-scheduler-airflow
-        image: juniorsntsid/airflow-docker:v2
-        imagePullPolicy: Always
-        args:
-        - scheduler
-        env:
-        - name: AIRFLOW__CORE__SQL_ALCHEMY_CONN
-          valueFrom:  
-            secretKeyRef:
-              name: airflow-secrets
-              key: sql_alchemy_conn
-        envFrom:
-        - configMapRef:
-            name: airflow-cfgfile
-        volumeMounts:
-        - name: airflow-dags
-          mountPath: /usr/local/airflow/dags
       volumes:
       - emptyDir: {}
         name: airflow-dags
       - configMap:
           name: airflow-cfgfile
         name: airflow-cfgfile
+      containers:
+      - name: container-scheduler-airflow
+        image: juniorsntsid/airflow-docker:v2
+        imagePullPolicy: Always
+        args:
+        - scheduler
+        envFrom:
+        - configMapRef:
+            name: airflow-cfgfile
+        volumeMounts:
+        - name: airflow-dags
+          mountPath: /usr/local/airflow/dags

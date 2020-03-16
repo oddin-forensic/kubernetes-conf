@@ -14,8 +14,8 @@ spec:
       labels:
         name: ambassador-pod
     spec:
-      hostNetwork: true
-      dnsPolicy: ClusterFirstWithHostNet
+      # hostNetwork: true
+      # dnsPolicy: ClusterFirstWithHostNet
       serviceAccountName: ambassador
       containers:
       - name: ambassador-container

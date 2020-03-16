@@ -3,6 +3,14 @@ apiVersion: v1
 kind: Service
 metadata:
   name: backend-api-service-clusterip
+  annotations:
+    getambassador.io/config: |
+      ---
+      apiVersion: ambassador/v2
+      kind: Mapping
+      name: backend-gateway
+      prefix: /backend/
+      service: backend-api-service-clusterip:9000
 spec:
   ports:
   - port: 9000

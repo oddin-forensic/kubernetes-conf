@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: airflow-scheduler-deployment
+spec:
+  selector:
+    matchLabels:
+      name: airflow-scheduler-pod
+  template:
+    metadata:
+      labels:
+        name: airflow-scheduler-pod
+    spec:
+      volumes:
+      - emptyDir: {}
+        name: airflow-dags
+      - configMap:
+          name: airflow-cfgfile
+        name: airflow-cfgfile
+      containers:
+      - name: container-scheduler-airflow
+        image: juniorsntsid/airflow-docker:v2
+        imagePullPolicy: Always
+        args:
+        - scheduler
+        envFrom:
+        - configMapRef:
+            name: airflow-cfgfile
+        volumeMounts:
+        - name: airflow-dags
+          mountPath: /usr/local/airflow/dags

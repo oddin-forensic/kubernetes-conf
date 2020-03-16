@@ -9,11 +9,11 @@ metadata:
       apiVersion: ambassador/v2
       kind: Mapping
       name: frontend-gateway
-      prefix: /caimp
-      service: frontend-service-clusterip:80
+      prefix: /caimp/
+      service: http://httpbin.org
 spec:
   ports:
-  - port: 80
+  - port: 30036
     targetPort: 80
     protocol: TCP
   selector: 

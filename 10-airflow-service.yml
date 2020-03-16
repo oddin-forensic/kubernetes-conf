@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: airflow-web-service-nodeport
+  annotations:
+    getambassador.io/config: |
+      ---
+      apiVersion: ambassador/v2
+      kind: Mapping
+      name: airflow-gateway
+      prefix: /airflow/
+      service: airflow-web-service-nodeport:31463
+spec:
+  ports:
+  - nodePort: 31463
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    name: airflow-web-pod
+  type: NodePort

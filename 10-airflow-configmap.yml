@@ -1,0 +1,20 @@
+---
+apiVersion: v1
+kind: ConfigMap
+data:
+  AIRFLOW__CORE__EXECUTOR: LocalExecutor
+  AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://oddin:oddin@postgres-airflow-service:5432/airflow
+  POSTGRES_USER: oddin
+  POSTGRES_PASSWORD: oddin
+  POSTGRES_HOST: postgres-airflow-service
+  POSTGRES_PORT: "5432"
+  POSTGRES_DB: airflow
+metadata:
+  name: airflow-cfgfile
+---
+apiVersion: v1
+data:
+  name: teste
+kind: ConfigMap
+metadata:
+  name: airflow-gitsync

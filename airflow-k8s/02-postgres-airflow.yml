@@ -1,0 +1,51 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-airflow-deployment
+spec:
+  selector:
+    matchLabels:
+      name: postgres-airflow-pod
+  template:
+    metadata:
+      labels:
+        name: postgres-airflow-pod
+    spec:
+      containers:
+        - name: container-airflow-postgres
+          image: postgres
+          ports:
+            - containerPort: 5432
+              protocol: TCP
+          volumeMounts:
+            - name: dbvol
+              mountPath: /var/lib/postgresql/data/pgdata
+          env:
+            - name: POSTGRES_PASSWORD
+              value: airflow
+            - name: POSTGRES_USER
+              value: airflow
+            - name: POSTGRES_DB
+              value: airflow
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
+          resources:
+            requests:
+              memory: .5Gi
+              cpu: .5
+      volumes:
+        - name: dbvol
+          emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-airflow
+spec:
+  clusterIP: None
+  ports:
+    - port: 5432
+      targetPort: 5432
+  selector:
+    name: postgres-airflow-pod
