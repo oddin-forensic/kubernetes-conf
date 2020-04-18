@@ -17,6 +17,9 @@ spec:
       - configMap:
           name: airflow-cfgfile
         name: airflow-cfgfile
+      - configMap:
+          name: airflow-gitsync
+        name: airflow-gitsync
       containers:
       - name: container-webserver-airflow
         image: juniorsntsid/airflow-docker:v2
@@ -31,3 +34,11 @@ spec:
         volumeMounts:
         - name: airflow-dags
           mountPath: /usr/local/airflow/dags
+      - name: git-sync-clone
+        image: k8s.gcr.io/git-sync:v3.1.2
+        envFrom:
+        - configMapRef:
+            name: airflow-gitsync
+        volumeMounts:
+          - mountPath: /git
+            name: airflow-dags

@@ -17,5 +17,5 @@ spec:
     protocol: TCP
     targetPort: 8080
   selector:
-    name: airflow-web-pod
+    name: airflow-webserver-pod
   type: NodePort

@@ -10,26 +10,26 @@ metadata:
       kind: Mapping
       name: frontend-gateway
       prefix: /caimp/
-      service: http://httpbin.org
+      service: frontend-service-clusterip:80
 spec:
   ports:
-  - port: 30036
+  - port: 80
     targetPort: 80
     protocol: TCP
   selector: 
     name: frontend-pod
   type: ClusterIP
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: frontend-service-nodeport
-spec:
-  ports:
-  - nodePort: 31464
-    port: 80
-    targetPort: 80
-    protocol: TCP
-  selector: 
-    name: frontend-pod
-  type: NodePort
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: frontend-service-nodeport
+# spec:
+#   ports:
+#   - nodePort: 31464
+#     port: 80
+#     targetPort: 80
+#     protocol: TCP
+#   selector: 
+#     name: frontend-pod
+#   type: NodePort

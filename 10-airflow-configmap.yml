@@ -14,7 +14,16 @@ metadata:
 ---
 apiVersion: v1
 data:
-  name: teste
+  GIT_SYNC_REPO: “https://github.com/xyz/dags-airflow"
+  GIT_SYNC_BRANCH: “master”
+  GIT_SYNC_ROOT: “/git”
+  GIT_SYNC_DEST: “sync”
+  GIT_SYNC_DEPTH: “1”
+  GIT_SYNC_ONE_TIME: “false”
+  GIT_SYNC_WAIT: “60”
+  GIT_SYNC_USERNAME: “git_username”
+  GIT_KNOWN_HOSTS: “false”
+  GIT_PASSWORD: “242452”
 kind: ConfigMap
 metadata:
   name: airflow-gitsync

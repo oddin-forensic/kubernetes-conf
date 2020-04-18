@@ -150,10 +150,10 @@ spec:
                   values:
                   - dgraph-zero
               topologyKey: kubernetes.io/hostname
-      # volumes:
-      # - name: datadir
-      #   persistentVolumeClaim:
-      #     claimName: datadir
+      volumes:
+      - name: datadir
+        persistentVolumeClaim:
+          claimName: datadir
       containers:
       - name: zero
         image: dgraph/dgraph:latest
@@ -163,9 +163,9 @@ spec:
           name: zero-grpc
         - containerPort: 6080
           name: zero-http
-        # volumeMounts:
-        # - name: datadir
-        #   mountPath: /dgraph
+        volumeMounts:
+        - name: datadir
+          mountPath: /dgraph
         env:
           - name: POD_NAMESPACE
             valueFrom:
@@ -276,10 +276,10 @@ spec:
       #     volumeMounts:
       #       - name: datadir
       #         mountPath: /dgraph
-      # volumes:
-      # - name: datadir
-      #   persistentVolumeClaim:
-      #     claimName: datadir
+      volumes:
+      - name: datadir
+        persistentVolumeClaim:
+          claimName: datadir
       containers:
       - name: alpha
         image: dgraph/dgraph:latest
@@ -291,9 +291,9 @@ spec:
           name: alpha-http
         - containerPort: 9080
           name: alpha-grpc
-        # volumeMounts:
-        # - name: datadir
-        #   mountPath: /dgraph
+        volumeMounts:
+        - name: datadir
+          mountPath: /dgraph
         env:
           # This should be the same namespace as the dgraph-zero
           # StatefulSet to resolve a Dgraph Zero's DNS name for

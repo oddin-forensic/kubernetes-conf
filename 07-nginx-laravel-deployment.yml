@@ -13,7 +13,8 @@ spec:
     spec:
       containers:
       - name: container-nginx
-        image: juniorsntsid/nginx-laravel-oddin:v1
+        # image: juniorsntsid/nginx-laravel-oddin:v1
+        image: nginx
         imagePullPolicy: Always
         ports:
           - containerPort: 80
