@@ -6,8 +6,8 @@ data:
   SERVICE_FRONTEND: frontend-service-clusterip
   SERVICE_AIRFLOW:  airflow-web-service-nodeport:8080
   SERVICE_MEMCACHED: memcached-clusterip-service
-  SERVICE_DGRAPH_ALPHA: 
-  SERVICE_DGRAPH_ZERO: 
-  SERVICE_RATEL: 
+  # SERVICE_DGRAPH_ALPHA: 
+  # SERVICE_DGRAPH_ZERO: 
+  # SERVICE_RATEL: 
 metadata:
   name: global-configmaps

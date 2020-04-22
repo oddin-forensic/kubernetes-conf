@@ -6,10 +6,10 @@ metadata:
   annotations:
     getambassador.io/config: |
       ---
-      apiVersion: ambassador/v2
+      apiVersion: ambassador/v1
       kind: Mapping
       name: frontend-gateway
-      prefix: /caimp/
+      prefix: /caimp
       service: frontend-service-clusterip:80
 spec:
   ports:

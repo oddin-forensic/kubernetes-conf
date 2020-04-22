@@ -6,10 +6,10 @@ metadata:
   annotations:
     getambassador.io/config: |
       ---
-      apiVersion: ambassador/v2
+      apiVersion: ambassador/v1
       kind: Mapping
       name: backend-gateway
-      prefix: /backend/
+      prefix: /backend
       service: backend-api-service-clusterip:9000
 spec:
   ports:
@@ -19,17 +19,17 @@ spec:
   selector: 
     name: backend-pod
   type: ClusterIP
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: backend-api-service-nodeport
-spec:
-  ports:
-  - nodePort: 31466
-    port: 9000
-    targetPort: 9000
-    protocol: TCP
-  selector: 
-    name: backend-pod
-  type: NodePort
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: backend-api-service-nodeport
+# spec:
+#   ports:
+#   - nodePort: 31466
+#     port: 9000
+#     targetPort: 9000
+#     protocol: TCP
+#   selector: 
+#     name: backend-pod
+#   type: NodePort
