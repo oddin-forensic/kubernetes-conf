@@ -4,13 +4,13 @@ kind: Service
 metadata:
   name: nginx-api-service-clusterip
   annotations:
-  getambassador.io/config: |
-    ---
-    apiVersion: ambassador/v2
-    kind: Mapping
-    name: nginx-gateway
-    prefix: /nginx/
-    service: nginx-api-service-clusterip:80
+    getambassador.io/config: |
+      ---
+      apiVersion: ambassador/v2
+      kind: Mapping
+      name: nginx-gateway
+      prefix: /backend
+      service: nginx-api-service-clusterip:80
 spec:
   ports:
   - port: 80
@@ -19,17 +19,3 @@ spec:
   selector: 
     name: nginx-pod
   type: ClusterIP
-# ---
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   name: nginx-api-service-nodeport
-# spec:
-#   ports:
-#   - nodePort: 31468
-#     port: 80
-#     targetPort: 80
-#     protocol: TCP
-#   selector: 
-#     name: nginx-pod
-#   type: NodePort

@@ -11,15 +11,9 @@ spec:
       labels:
         name: airflow-webserver-pod
     spec:
-      volumes:
-      - emptyDir: {}
-        name: airflow-dags
-      - configMap:
-          name: airflow-cfgfile
-        name: airflow-cfgfile
-      - configMap:
-          name: airflow-gitsync
-        name: airflow-gitsync
+      # - configMap:
+      #     name: airflow-gitsync
+      #   name: airflow-gitsync
       containers:
       - name: container-webserver-airflow
         image: juniorsntsid/airflow-docker:v2
@@ -34,11 +28,18 @@ spec:
         volumeMounts:
         - name: airflow-dags
           mountPath: /usr/local/airflow/dags
-      - name: git-sync-clone
-        image: k8s.gcr.io/git-sync:v3.1.2
-        envFrom:
-        - configMapRef:
-            name: airflow-gitsync
-        volumeMounts:
-          - mountPath: /git
-            name: airflow-dags
+      volumes:
+      - name: airflow-dags
+        persistentVolumeClaim:
+          claimName: airflow-dags
+      - name: airflow-cfgfile
+        configMap:
+          name: airflow-cfgfile
+      # - name: git-sync-clone
+      #   image: k8s.gcr.io/git-sync:v3.1.2
+      #   envFrom:
+      #   - configMapRef:
+      #       name: airflow-gitsync
+      #   volumeMounts:
+      #     - mountPath: /git
+      #       name: airflow-dags

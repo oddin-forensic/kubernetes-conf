@@ -10,17 +10,3 @@ spec:
   selector: 
     name: memcached-pod-statefulset
   type: ClusterIP
----
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   name: memcached-nodeport-service
-# spec:
-#   ports:
-#   - nodePort: 31467
-#     port: 11211
-#     targetPort: 11211
-#     protocol: TCP
-#   selector: 
-#     name: memcached-pod-statefulset
-#   type: NodePort
