@@ -6,8 +6,25 @@ metadata:
 spec:
   ports:
   - port: 9000
+    name: backend
     targetPort: 9000
     protocol: TCP
   selector: 
     name: backend-pod
   type: ClusterIP
+
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: traefik-web-ui
+  namespace: kube-system
+spec:
+  rules:
+  - host: oddin.org
+    http:
+      paths:
+      - path: /api
+        backend:
+          serviceName: backend-api-service-clusterip
+          servicePort: backend

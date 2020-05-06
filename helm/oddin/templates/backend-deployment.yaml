@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+spec:
+  selector:
+    matchLabels: 
+      name: "{{ .Release.Name }}-{{ .Values.frontend.selector_name }}"
+  template:
+    metadata:
+      labels:
+        name: "{{ .Release.Name }}-{{ .Values.frontend.selector_name }}"
+    spec:
+      containers:
+      - name: container-backend
+        image: "{{ .Values.backend.image }}:{{ .Values.backend.tag }}"
+        imagePullPolicy: {{ .Values.backend.imagePullPolicy }}
+        ports:
+          - containerPort: 9000
+        envFrom:
+        - configMapRef:
+            name: backend-configmap

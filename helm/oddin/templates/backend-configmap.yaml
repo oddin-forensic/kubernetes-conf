@@ -1,0 +1,17 @@
+---
+apiVersion: v1
+kind: ConfigMap
+data:
+  APP_URL: http://127.0.0.1
+  DB_CONNECTION: pgsql
+  DB_HOST: postgres-service
+  DB_PORT: "5432"
+  DB_DATABASE: oddin
+  DB_USERNAME: oddin
+  DB_PASSWORD: oddin
+  MEMCACHED_HOST: memcached-clusterip-service
+  MEMCACHED_PORT: "11211"
+  JWT_SECRET: EsMshfv3DI8HuORFZLRnmhtqugfaku2iOt9UmUp0xbfSCh4cvZIcQw0rJFDYME9U
+  JWT_TTL: "360"
+metadata:
+  name: backend-configmap

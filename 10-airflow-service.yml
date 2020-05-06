@@ -2,19 +2,35 @@ apiVersion: v1
 kind: Service
 metadata:
   name: airflow-web-service-clusterip
-  annotations:
-    getambassador.io/config: |
-      ---
-      apiVersion: ambassador/v1
-      kind: Mapping
-      name: airflow-gateway
-      prefix: /airflow
-      service: airflow-web-service-clusterip:80
+  # annotations:
+  #   getambassador.io/config: |
+  #     ---
+  #     apiVersion: ambassador/v1
+  #     kind: Mapping
+  #     name: airflow-gateway
+  #     prefix: /airflow
+  #     service: airflow-web-service-clusterip:8080
 spec:
   ports:
-  - port: 80
+  - port: 8080
     targetPort: 8080
+    name: airflow
     protocol: TCP
   selector:
     name: airflow-webserver-pod
   type: ClusterIP
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: traefik-web-ui
+  namespace: kube-system
+spec:
+  rules:
+  - host: oddin.org
+    http:
+      paths:
+      - path: /airflow
+        backend:
+          serviceName: airflow-web-service-clusterip
+          servicePort: airflow

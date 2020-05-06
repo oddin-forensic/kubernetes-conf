@@ -30,8 +30,10 @@ spec:
           mountPath: /usr/local/airflow/dags
       volumes:
       - name: airflow-dags
+        secret:
+          secretName: nfs-secret
         persistentVolumeClaim:
-          claimName: airflow-dags
+          claimName: nfs
       - name: airflow-cfgfile
         configMap:
           name: airflow-cfgfile

@@ -1,0 +1,6 @@
+dependencies:
+- name: ambassador
+  repository: https://www.getambassador.io
+  version: 6.3.3
+digest: sha256:bb35f7fd44197a9be10d8376c31ae6aa449fc2c18a3a3930d689900b7a6c60e2
+generated: "2020-05-05T21:20:38.711862114-03:00"

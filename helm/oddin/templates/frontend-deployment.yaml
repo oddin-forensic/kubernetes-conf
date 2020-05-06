@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+spec:
+  selector:
+    matchLabels: 
+      name: "{{ .Release.Name }}-{{ .Values.frontend.selector_name }}"
+  template:
+    metadata:
+      labels:
+        name: "{{ .Release.Name }}-{{ .Values.frontend.selector_name }}"
+    spec:
+      containers:
+      - name: container-frontend
+        image: "{{ .Values.frontend.image }}:{{ .Values.frontend.tag }}"
+        imagePullPolicy: {{ .Values.frontend.imagePullPolicy }}
+        envFrom:
+        - configMapRef:
+            name: global-configmaps
+        ports:
+        - name: http
+          containerPort: 80

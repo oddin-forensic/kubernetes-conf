@@ -1,0 +1,32 @@
+# Default values for oddin.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+frontend:
+  name: frontend
+  selector_name: frontend-oddin
+  image: juniorsntsid/oddin-frontend
+  tag: v1
+  imagePullPolicy: Always
+
+backend:
+  name: backend
+  selector_name: backend-oddin
+  image: juniorsntsid/oddin-frontend
+  tag: v1
+  imagePullPolicy: Always
+
+postgresql:
+  postgresqlUsername: postgres
+  postgresqlPassword: oddin
+  postgresqlDatabase: oddin
+  persistence:
+    enabled: false
+    accessModes:
+      - ReadWriteOnce
+      
+ambassador:
+  enabled: false
+
+traefik:
+  enabled: true

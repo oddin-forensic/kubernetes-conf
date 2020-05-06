@@ -30,6 +30,8 @@ spec:
         env:
         - name: AMBASSADOR_NAMESPACE
           value: default
+        - name: AMBASSADOR_VERIFY_SSL_FALSE
+          value: true
         livenessProbe:
           httpGet:
             path: /ambassador/v0/check_alive

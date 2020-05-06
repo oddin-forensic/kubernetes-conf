@@ -1,0 +1,25 @@
+apiVersion: v2
+name: oddin
+description: A Helm chart for Kubernetes
+type: application
+version: 0.1.0
+appVersion: 1.16.0
+maintainers:
+  - name: jsantos
+    email: juniorsnts123@gmail.com
+dependencies:
+  - name: ambassador
+    version: 6.3.3
+    repository: https://www.getambassador.io
+    condition: ambassador.enabled
+  - name: traefik/traefik
+    version: 1.86.2
+    repository: https://containous.github.io/traefik-helm-chart
+    condition: traefik.enabled
+  - name: stable/memcached
+    version: 3.2.3
+    repository: https://kubernetes-charts.storage.googleapis.com/
+  - name: postgresql
+    version: 8.1.4
+    repository: https://kubernetes-charts.storage.googleapis.com/
+    condition: postgresql.enabled
